@@ -133,7 +133,7 @@
             <systemPropertyVariables>
               <myWorkingDir>${project.build.directory}</myWorkingDir>
             </systemPropertyVariables>
-            <argLine>-Xmx968m -Duser.language=en -Duser.region=US</argLine>
+            <argLine>-Xmx2048m -Duser.language=en -Duser.region=US</argLine>
             <redirectTestOutputToFile>true</redirectTestOutputToFile>
           </configuration>
         </plugin>
@@ -141,6 +141,9 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>2.16</version>
+          <configuration>
+            <argLine>-Xmx2048m</argLine>
+          </configuration>
           <executions>
               <execution>
                 <goals>

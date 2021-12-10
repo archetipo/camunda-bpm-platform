@@ -91,7 +91,6 @@
         <configuration>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <enableAssertions>true</enableAssertions>
-          <argLine>-Xmx512m</argLine>
           <systemProperties>
             <property>
               <name>jboss.home</name>
