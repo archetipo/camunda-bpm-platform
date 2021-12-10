@@ -115,7 +115,7 @@
 
       <if test="!authCheck.revokeAuthorizationCheckEnabled">
         <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClause" />
-        AUTH ON (AUTH.RESOURCE_ID_ in (RES.PROC_INST_ID_, P.KEY_, '*'))
+        AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} RES.PROC_INST_ID_ ${historyAuthJoinSeparator} P.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
       </if>
 
     </if>
@@ -289,7 +289,7 @@
 
     <if test="authCheck.shouldPerformAuthorizatioCheck &amp;&amp; !authCheck.revokeAuthorizationCheckEnabled &amp;&amp; authCheck.authUserId != null">
       <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClause" />
-      AUTH ON (AUTH.RESOURCE_ID_ in (RES.PROC_INST_ID_, EXEC1.PROC_INST_ID_, PROCDEF.KEY_, '*'))
+      AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} RES.PROC_INST_ID_ ${historyAuthJoinSeparator} EXEC1.PROC_INST_ID_ ${historyAuthJoinSeparator} PROCDEF.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
     </if>
 
     <where>

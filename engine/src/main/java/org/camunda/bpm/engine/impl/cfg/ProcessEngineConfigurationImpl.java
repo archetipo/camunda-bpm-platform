@@ -1806,6 +1806,10 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
       properties.put("dayComparator", DbSqlSessionFactory.databaseSpecificDaysComparator.get(databaseType));
 
       properties.put("collationForCaseSensitivity", DbSqlSessionFactory.databaseSpecificCollationForCaseSensitivity.get(databaseType));
+      
+      properties.put("historyAuthJoinStart", DbSqlSessionFactory.databaseSpecificHistoryAuthJoinStart.get(databaseType));
+      properties.put("historyAuthJoinEnd", DbSqlSessionFactory.databaseSpecificHistoryAuthJoinEnd.get(databaseType));
+      properties.put("historyAuthJoinSeparator", DbSqlSessionFactory.databaseSpecificHistoryAuthJoinSeparator.get(databaseType));
 
       Map<String, String> constants = DbSqlSessionFactory.dbSpecificConstants.get(databaseType);
       for (Entry<String, String> entry : constants.entrySet()) {

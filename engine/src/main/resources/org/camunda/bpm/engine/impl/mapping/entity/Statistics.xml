@@ -205,7 +205,7 @@
 
       <if test="authCheck.shouldPerformAuthorizatioCheck &amp;&amp; !authCheck.revokeAuthorizationCheckEnabled &amp;&amp; authCheck.authUserId != null">
         <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClause" /> 
-        AUTH ON (AUTH.RESOURCE_ID_ in (RES.ID_, RES.KEY_, '*'))      
+        AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} RES.ID_ ${historyAuthJoinSeparator} RES.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})      
       </if>
       <where>
         <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.queryAuthorizationCheck" />
@@ -434,7 +434,7 @@
           <if test="!revokeAuthorizationCheckEnabled">
             <bind name="atomicChecks" value="processInstancePermissionChecks" />
             <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-            AUTH ON (AUTH.RESOURCE_ID_ in (E.PROC_INST_ID_, P.KEY_, '*'))
+            AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} E.PROC_INST_ID_ ${historyAuthJoinSeparator} P.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
           </if>
         </if>
 
@@ -494,7 +494,7 @@
                     <if test="!revokeAuthorizationCheckEnabled">
                       <bind name="atomicChecks" value="processInstancePermissionChecks" />
                       <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-                      AUTH ON (AUTH.RESOURCE_ID_ in (E.PROC_INST_ID_, P.KEY_, '*'))
+                      AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} E.PROC_INST_ID_ ${historyAuthJoinSeparator} P.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
                     </if>
                   </if>
 
@@ -525,7 +525,7 @@
                       <if test="authCheck.shouldPerformAuthorizatioCheck &amp;&amp; !revokeAuthorizationCheckEnabled &amp;&amp; authUserId != null">
                         <bind name="atomicChecks" value="jobPermissionChecks" />
                         <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-                        AUTH ON (AUTH.RESOURCE_ID_ in (JOB.PROCESS_INSTANCE_ID_, JOB.PROCESS_DEF_KEY_, '*'))
+                        AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} JOB.PROCESS_INSTANCE_ID_ ${historyAuthJoinSeparator} JOB.PROCESS_DEF_KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
                       </if>
 
                       where
@@ -552,7 +552,7 @@
                         <if test="!revokeAuthorizationCheckEnabled">
                           <bind name="atomicChecks" value="incidentPermissionChecks" />
                           <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-                          AUTH ON (AUTH.RESOURCE_ID_ in (I.PROC_INST_ID_, PROCDEF.KEY_, '*'))
+                          AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} I.PROC_INST_ID_ ${historyAuthJoinSeparator} PROCDEF.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
                         </if>
                       </if>
 
@@ -590,7 +590,7 @@
                     <if test="!revokeAuthorizationCheckEnabled">
                       <bind name="atomicChecks" value="processInstancePermissionChecks" />
                       <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-                      AUTH ON (AUTH.RESOURCE_ID_ in (E.PROC_INST_ID_, P.KEY_, '*'))
+                      AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} E.PROC_INST_ID_ ${historyAuthJoinSeparator} P.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
                     </if>
                   </if>
 
@@ -626,7 +626,7 @@
                 <if test="authCheck.shouldPerformAuthorizatioCheck &amp;&amp; !revokeAuthorizationCheckEnabled &amp;&amp; authUserId != null">
                   <bind name="atomicChecks" value="jobPermissionChecks" />
                   <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-                  AUTH ON (AUTH.RESOURCE_ID_ in (JOB.PROCESS_INSTANCE_ID_, JOB.PROCESS_DEF_KEY_, '*'))
+                  AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} JOB.PROCESS_INSTANCE_ID_ ${historyAuthJoinSeparator} JOB.PROCESS_DEF_KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
                 </if>
 
                 where
@@ -663,7 +663,7 @@
                 <if test="!revokeAuthorizationCheckEnabled">
                   <bind name="atomicChecks" value="incidentPermissionChecks" />
                   <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClauseWithBinding" />
-                  AUTH ON (AUTH.RESOURCE_ID_ in (I.PROC_INST_ID_, PROCDEF.KEY_, '*'))
+                  AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart} I.PROC_INST_ID_ ${historyAuthJoinSeparator} PROCDEF.KEY_ ${historyAuthJoinSeparator} '*' ${historyAuthJoinEnd})
                 </if>
               </if>
               where

@@ -333,11 +333,13 @@
         See camunda-bpm-platform-ee/webapps/camunda-webapp/plugins/src/main/resources/org/camunda/bpm/cockpit/impl/plugin/history/historicIncident.xml
       -->
       <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClause"/>
-      AUTH ON (AUTH.RESOURCE_ID_ in (
-      <if test="authCheck.isHistoricInstancePermissionsEnabled">
-      RES.PROC_INST_ID_,
-      </if>
-      RES.PROC_DEF_KEY_, '*'))
+      AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart}
+        RES.PROC_DEF_KEY_ ${historyAuthJoinSeparator} '*'
+        <if test="authCheck.isHistoricInstancePermissionsEnabled">
+          ${historyAuthJoinSeparator} RES.PROC_INST_ID_
+        </if>
+        ${historyAuthJoinEnd}
+      )
     </if>
 
     <where>

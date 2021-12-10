@@ -327,13 +327,13 @@
             on PROCDEF.ID_ = PROC_EXECUTION.PROC_DEF_ID_   
             <if test="!authCheck.revokeAuthorizationCheckEnabled">      
               <include refid="org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity.authCheckJoinWithoutOnClause" /> 
-              AUTH ON (
-              AUTH.RESOURCE_ID_ in (
-                                    RES.PROC_INST_ID_,
-                                    PROC_EXECUTION.ID_,
-                                    PROCDEF.KEY_,
-                                    RES.TASK_ID_,
-                                    '*')
+              AUTH ON (AUTH.RESOURCE_ID_ ${historyAuthJoinStart}
+                RES.PROC_INST_ID_ 
+                ${historyAuthJoinSeparator} PROC_EXECUTION.ID_
+                ${historyAuthJoinSeparator} PROCDEF.KEY_
+                ${historyAuthJoinSeparator} RES.TASK_ID_
+                ${historyAuthJoinSeparator} '*'
+                ${historyAuthJoinEnd}
               )
             </if>
           </if>
